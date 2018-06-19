@@ -1,12 +1,14 @@
 
 
+var startGame = function() {
+    
+}
 
 var userNum = 0
-
 //Random number between 19 and 120 at the start of the game
 var computerNum = Math.floor(Math.random() *101)+19;
-var lost;
-var win;
+var lost = 0;
+var win = 0;
 
 
 //4 crystals.  Each crystal will generate a random number between 1-12.
@@ -18,6 +20,7 @@ for(var i = 0; i <4; i++){
         // crystal.attr("src", 'assets/images/greengem.jpeg');
         crystal.attr("data-crystal", random);   
     $(".crystals").append(crystal);
+    crystal.html(random);
     console.log(random);
 
 }
@@ -34,13 +37,17 @@ $(".crystal").on("click",function() {
  
 
         if(userNum > computerNum) {
+            lost--;
             console.log("You lost!");
+            $("#lost").html(win);
         }
          else if (userNum === computerNum) { 
+             win++;
             console.log("You won!");
+            $("#win").html(win);
          }
     }
-    )
+     )
 
 
 
