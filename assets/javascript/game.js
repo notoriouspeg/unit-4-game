@@ -1,53 +1,64 @@
 
 
-var startGame = function() {
-    
-}
+
 
 var userNum = 0
 //Random number between 19 and 120 at the start of the game
-var computerNum = Math.floor(Math.random() *101)+19;
+var computerNum = Math.floor(Math.random() * 101) + 19;
 var lost = 0;
 var win = 0;
 
 
 //4 crystals.  Each crystal will generate a random number between 1-12.
-for(var i = 0; i <4; i++){
-    var random = Math.floor(Math.random() * 12)+1;
-    var crystal = $("<img>");
+
+var startGame = function () {
+    $(".crystals").empty();
+
+    $("#result").html('Random Result: ' + computerNum);
+ 
+    for (var i = 0; i < 4; i++) {
+        var random = Math.floor(Math.random() * 12) + 1;
+        var crystal = $("<img>");
         crystal.attr("class", 'crystal');
         crystal.attr("src", 'assets/images/blueie.jfif');
         // crystal.attr("src", 'assets/images/greengem.jpeg');
-        crystal.attr("data-crystal", random);   
-    $(".crystals").append(crystal);
-    crystal.html(random);
-    console.log(random);
+        crystal.attr("data-crystal", random);
+        $(".crystals").append(crystal);
+        crystal.html(random);
+        console.log(random);
 
+    }
 }
 
-console.log(computerNum);
+// console.log(computerNum);
+
+startGame();
 
 //Players score updated when crystal clicked
-$(".crystal").on("click",function() {
+
+$(document).on('click', ".crystal", function () {
     console.log("click");
     console.log($(this).data("crystal"));
     var crystalScore = $(this).data("crystal");
     userNum = userNum + crystalScore;
-    console.log(userNum);    
- 
+    console.log(userNum);
 
-        if(userNum > computerNum) {
-            lost--;
-            console.log("You lost!");
-            $("#lost").html(win);
-        }
-         else if (userNum === computerNum) { 
-             win++;
-            console.log("You won!");
-            $("#win").html(win);
-         }
+
+    if (userNum > computerNum) {
+        lost--;
+        console.log("You lost!");
+        $("#lost").html(lost);
+        userNum = 0;
+    startGame();
     }
-     )
+    else if (userNum === computerNum) {
+        win++;
+        console.log("You won!");
+        $("#win").html(win);
+        userNum = 0;
+    startGame();
+    }
+}); 
 
 
 
